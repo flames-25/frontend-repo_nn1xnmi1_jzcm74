@@ -9,8 +9,8 @@ export default function MusicPlayer() {
 
   const track = {
     title: 'Cyberpunk Ride',
-    artist: 'Pixabay Sounds',
-    src: 'https://images.unsplash.com/photo-1569941644020-f7a16dd4621d?ixid=M3w3OTkxMTl8MHwxfHNlYXJjaHwxfHxDeWJlcnB1bmslMjBSaWRlfGVufDB8MHx8fDE3NjMwMzczMDB8MA&ixlib=rb-4.1.0&w=1600&auto=format&fit=crop&q=80',
+    artist: 'Royalty-free',
+    src: 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3',
   }
 
   useEffect(() => {
@@ -40,10 +40,10 @@ export default function MusicPlayer() {
         <div className="text-[10px] sm:text-xs text-white/70 truncate">{track.artist}</div>
       </div>
       <div className="flex items-center gap-2 ml-auto">
-        <button onClick={togglePlay} className="p-2 rounded-lg bg-white/10 hover:bg-white/20 transition">
+        <button onClick={togglePlay} className="p-2 rounded-lg bg-white/10 hover:bg-white/20 transition" aria-label={isPlaying ? 'Pausar' : 'Reproducir'}>
           {isPlaying ? <Pause className="w-4 h-4" /> : <Play className="w-4 h-4" />}
         </button>
-        <button onClick={toggleMute} className="p-2 rounded-lg bg-white/10 hover:bg-white/20 transition">
+        <button onClick={toggleMute} className="p-2 rounded-lg bg-white/10 hover:bg-white/20 transition" aria-label={muted ? 'Activar sonido' : 'Silenciar'}>
           {muted ? <VolumeX className="w-4 h-4" /> : <Volume2 className="w-4 h-4" />}
         </button>
         <input
@@ -54,6 +54,7 @@ export default function MusicPlayer() {
           value={muted ? 0 : volume}
           onChange={(e) => setVolume(parseFloat(e.target.value))}
           className="w-20 accent-fuchsia-400"
+          aria-label="Volumen"
         />
       </div>
       <audio ref={audioRef} src={track.src} preload="auto" crossOrigin="anonymous" />
